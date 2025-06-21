@@ -8,7 +8,7 @@
     <div class="note-wrapper">
       <app-notes [note]="note" class="note-card"></app-notes>
         <button (click)="deleteNote(note.id)" class="btn btn-danger mt-2">Delete Note</button>
-        <button (click)="editNote(note.id)" class="btn btn-danger mt-2" id="edit-btn">Edit Note</button>
+        <button (click)="editNote(note.id)" class="" id="edit-btn">Edit Note</button>
     </div>
   }
 </div>
@@ -30,7 +30,8 @@
     @for (points of newKeypoints; track $index) {
       <div class="form-group">
         <label for="keypoint{{$index}}">Point {{$index + 1}}</label>
-        <input type="text" id="keypoint{{$index}}" [(ngModel)]="newKeypoints[$index]" class="form-control">
+        <input type="text" id="keypoint{{$index}}" [(ngModel)]="newKeypoints[$index]" class="form-control" id="keypoint-bar">
+        <button (click)="removeKeypoint($index)" class="btn btn-sm btn-outline-primary mb-2" id="remove-kp-btn">REMOVE</button>
       </div>
     }
 

@@ -49,3 +49,8 @@ app-notes {
   margin-left: 50px;
 }
 
+#remove-kp-btn{
+  padding: 5px 10px;
+  background-color: red;
+  color: white;
+}
