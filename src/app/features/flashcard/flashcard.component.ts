@@ -6,9 +6,11 @@ import { FormsModule } from '@angular/forms';
 import { FlashcardService } from '../../services/flashcard.service';
 import { FlashcardDashboardComponent } from '../flashcard-dashboard/flashcard-dashboard.component';
 
+import { Output, EventEmitter } from '@angular/core';
+
 @Component({
   selector: 'app-flashcard',
-  standalone:true,
+  standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './flashcard.component.html',
   styleUrl: './flashcard.component.css'
@@ -17,7 +19,25 @@ export class FlashcardComponent {
 
   @Input() public flashCard!: FlashcardDto;
 
-  constructor(private flashcardService: FlashcardService, private flashcardDashboardComponent: FlashcardDashboardComponent) { }
+
+  @Output() refreshRequested = new EventEmitter<void>();
+
+  public deleteFlashCard(id: number): void {
+    this.flashcardService.deleteFlashcard(id).subscribe({
+      next: () => {
+        console.log('Flashcard deleted. Emitting to parent')
+        this.refreshRequested.emit();  // Tell parent to reload
+      },
+      error: (error: any) => {
+        console.error('Error deleting flashcard:', error);
+      }
+    });
+  }
+
+
+  constructor(private flashcardService: FlashcardService) { }
+
+
 
   isFlipped = false;
   selectedOption: string | null = null;
@@ -26,21 +46,7 @@ export class FlashcardComponent {
     this.isFlipped = true;
   }
 
-  
-  public reload(){
-    this.flashcardDashboardComponent.ngOnInit();
-  }
 
-  public deleteFlashCard(id: number): void {
-    this.flashcardService.deleteFlashcard(id).subscribe({
-      next: () => { this.flashcardService.getAllFlashCards();
-      this.reload();  
-       },
-      error: (error: any) => {
-        console.error('Error deleting flashcard:', error);
-      }
-    });
-  }
 
 
   // flipBack() {

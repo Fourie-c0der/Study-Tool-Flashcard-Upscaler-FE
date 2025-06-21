@@ -4,7 +4,6 @@ import { FlashcardComponent } from '../flashcard/flashcard.component';
 import { FlashcardDto } from '../../models/flashcard';
 import { FlashcardService } from '../../services/flashcard.service';
 import { FormsModule } from '@angular/forms';
-import { Output, EventEmitter } from '@angular/core';
 
 
 @Component({
@@ -15,8 +14,6 @@ import { Output, EventEmitter } from '@angular/core';
 })
 export class FlashcardDashboardComponent {
 
-  @Output() LoadFlashEvent = new EventEmitter<void>();
-  
   public flashCards: FlashcardDto[] = [];
 
   public showFlashCards: boolean = true;
@@ -41,7 +38,7 @@ export class FlashcardDashboardComponent {
         
         this.currentScore = 0;
         this.totalScore = this.flashCards.length;
-        this.LoadFlashEvent.emit(this.loadFlashCards());
+        console.log("Updated flashcards:", this.flashCards);
       },
       error: (error: any) => {
         console.error('Error fetching flashcards:', error);
@@ -83,6 +80,11 @@ export class FlashcardDashboardComponent {
     this.newOptions = ['', '', '', ''];
   }
   
+  public reloadFlashCardsFromEvent(): void {
+  console.log('Reloading Flashcards')
+  this.loadFlashCards();
+  }
+
   
 }
 
