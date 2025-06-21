@@ -1,21 +1,26 @@
+/* 3D Flip Container */
 .flashcard-container {
   perspective: 1000px;
   width: 300px;
   height: 400px;
 }
 
+/* Flip Animation */
 .flashcard {
   width: 100%;
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
   transition: transform 0.6s;
+  border-radius: 10px;
+  background-color: #42474e;
 }
 
 .flashcard-container.flipped .flashcard {
   transform: rotateY(180deg);
 }
 
+/* Front and Back Styles */
 .front,
 .back {
   position: absolute;
@@ -31,6 +36,7 @@
   justify-content: space-between;
 }
 
+/* Back Face Style */
 .back {
   transform: rotateY(180deg);
   background-color: #36a5a1;
@@ -38,6 +44,7 @@
   justify-content: center;
 }
 
+/* Options Display */
 .options {
   margin-bottom: 20px;
 }
@@ -46,26 +53,16 @@
   margin-bottom: 10px;
 }
 
+/* Default Button Style */
 button {
   padding: 10px 20px;
   border: none;
-  background-color: #007bff;
-  color: white;
   border-radius: 5px;
   cursor: pointer;
   align-self: center;
 }
 
-button:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
-}
-
-.flashcard {
-  border-radius: 10px;
-  background-color: #42474e;
-}
-
+/* Button States */
 button:enabled {
   background-color: #4caf50;
   color: white;
@@ -75,4 +72,62 @@ button:disabled {
   background-color: #a9a5a5;
   color: #666;
   cursor: not-allowed;
+}
+
+/* Edit Button (normal view) */
+.edit-button {
+  background-color: #6c757d;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #5a6268;
+}
+
+/* Edit Form Input Fields */
+.edit-form input {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 8px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  color: #333;
+}
+
+/* Button Row Layout (Save + Cancel side-by-side) */
+.edit-buttons-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* Save Button - Green */
+.btn-save {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-save:hover {
+  background-color: #218838;
+}
+
+/* Cancel Button - Red */
+.btn-cancel {
+  background-color: #dc3545;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.btn-cancel:hover {
+  background-color: #c82333;
 }
