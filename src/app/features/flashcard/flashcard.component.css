@@ -46,6 +46,7 @@
   margin-bottom: 10px;
 }
 
+
 button {
   padding: 10px 20px;
   border: none;
@@ -67,7 +68,7 @@ button:disabled {
 }
 
 button:enabled {
-  background-color: #4caf50;
+  background-color: #af4c4c;
   color: white;
 }
 
@@ -76,3 +77,4 @@ button:disabled {
   color: #666;
   cursor: not-allowed;
 }
+

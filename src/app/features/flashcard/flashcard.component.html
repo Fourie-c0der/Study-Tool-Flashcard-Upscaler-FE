@@ -11,6 +11,8 @@
         }
       </div>
       <button (click)="submitAnswer()" [disabled]="!selectedOption">Check Answer</button>
+      <button (click)="deleteFlashCard(flashCard.id)" class="">Delete Flashcard</button>
+        
     </div>
     <div class="back">
       <h4>The correct answer is:</h4>

@@ -5,26 +5,28 @@ import { Observable } from "rxjs";
 import { FlashcardDto } from "../models/flashcard";
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class FlashcardService {
-    constructor(private http: HttpClient, private router: Router) {}
+    constructor(private http: HttpClient, private router: Router) { }
 
     private baseUrl = 'http://localhost:5013/api/'
 
-    public getAllFlashCards() : Observable<FlashcardDto[]> {
-        return this.http.get<FlashcardDto[]>(this.baseUrl+'Flashcard');
+    public getAllFlashCards(): Observable<FlashcardDto[]> {
+        return this.http.get<FlashcardDto[]>(this.baseUrl + 'Flashcard');
     }
 
-    public getFlashcard(id : number) : Observable<FlashcardDto> {
-        return this.http.get<FlashcardDto>(this.baseUrl+'Flashcard' + '/' + id);
+    public getFlashcard(id: number): Observable<FlashcardDto> {
+        return this.http.get<FlashcardDto>(this.baseUrl + 'Flashcard' + '/' + id);
     }
 
-    public addFlashcard(newFlashcard : FlashcardDto) : Observable<FlashcardDto> {
-        return this.http.post<FlashcardDto>(this.baseUrl+'Flashcard', newFlashcard);
+    public addFlashcard(newFlashcard: FlashcardDto): Observable<FlashcardDto> {
+        return this.http.post<FlashcardDto>(this.baseUrl + 'Flashcard', newFlashcard);
+    }
+    public deleteFlashcard(id: number): Observable<any> {
+        return this.http.delete(this.baseUrl + 'Flashcard/' + id, {
+            responseType: 'text'
+        });
     }
 
-    public deleteFlashcard(id : number) : Observable<FlashcardDto> {
-        return this.http.delete<FlashcardDto>(this.baseUrl+'Flashcard'+ '/' + id);
-    }
 }
