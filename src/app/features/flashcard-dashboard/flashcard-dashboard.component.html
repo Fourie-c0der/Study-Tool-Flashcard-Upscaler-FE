@@ -5,8 +5,8 @@
 @if (showFlashCards) {   
     <div class="row">
         @for (flashCard of flashCards; track $index) {
-            <app-flashcard [flashCard]="flashCard" class="col-3 mx-1"></app-flashcard>
-        }
+            <app-flashcard [flashCard]="flashCard" class="col-3 mx-1"></app-flashcard>   
+          }
     </div>
 }
 @else {
@@ -32,4 +32,5 @@
       <button (click)="toggleAddNewFlashCard()" class="btn btn-secondary">Cancel</button>
     </div>
   </div>
+  
 }
