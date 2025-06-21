@@ -41,3 +41,11 @@ app-notes {
   cursor: pointer;
   align-self: center;
 }
+
+#edit-btn{
+  padding: 5px 15px;
+  background-color: #47d770;
+  color: white;
+  margin-left: 50px;
+}
+

@@ -9,6 +9,7 @@ import { NoteDto } from "../models/notes";
   providedIn: 'root'
 })
 export class NotesService {
+
     constructor(private http: HttpClient, private router: Router) {}
 
     private baseUrl = 'http://localhost:5013/api/'
@@ -27,5 +28,9 @@ export class NotesService {
 
     public deleteNote(id : number) : Observable<NoteDto> {
         return this.http.delete<NoteDto>(this.baseUrl+'Note'+ '/' + id);
+    }
+
+    updateNote(id: number, updatedNote: NoteDto): Observable<NoteDto> {
+    return this.http.put<NoteDto>(`${this.baseUrl}Note/${id}`, updatedNote);
     }
 }
