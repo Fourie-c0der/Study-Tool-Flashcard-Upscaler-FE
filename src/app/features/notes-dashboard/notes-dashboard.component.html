@@ -12,7 +12,6 @@
     </div>
   }
 </div>
-
 }
 @else {
   <div class="new-note-form">
@@ -31,7 +30,7 @@
     @for (points of newKeypoints; track $index) {
       <div class="form-group">
         <label for="keypoint{{$index}}">Point {{$index + 1}}</label>
-        <input type="text" id="keypoint{{$index}}" [(ngModel)]="newKeypoints[$index]" class="form-control"> 
+        <input type="text" id="keypoint{{$index}}" [(ngModel)]="newKeypoints[$index]" class="form-control">
       </div>
     }
 
@@ -39,12 +38,10 @@
       <button (click)="addKeypoint()" class="btn btn-sm btn-outline-primary mb-2">+ Add Key Point</button>
     </div>
     
-
     <div class="form-actions mt-3">
       <button (click)="saveNewNote()" class="btn btn-primary">
         {{ currentNoteId !== null ? 'Update Note' : 'Save' }}
       </button>
-
       <button (click)="toggleAddNewNote()" class="btn btn-secondary">Cancel</button>
     </div>
   </div>

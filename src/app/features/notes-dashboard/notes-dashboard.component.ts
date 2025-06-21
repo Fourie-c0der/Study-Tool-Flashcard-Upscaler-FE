@@ -19,8 +19,7 @@ export class NotesDashboardComponent {
   public isEditing: boolean = false;
   public currentNoteId: number | null = null;
 
-
-
+  
   newTopic: string = '';
   newDescription: string = '';
   newKeypoints: string[] = ['', '', '', ''];
@@ -104,12 +103,11 @@ public editNote(id: number): void {
   this.currentNoteId = noteToEdit.id;
   this.newTopic = noteToEdit.topic;
   this.newDescription = noteToEdit.description;
-
   this.newKeypoints = [...noteToEdit.points];
+
   while (this.newKeypoints.length < 4) {
     this.newKeypoints.push('');
   }
-
   this.showNotes = false;
   this.isEditing = true;
 }
