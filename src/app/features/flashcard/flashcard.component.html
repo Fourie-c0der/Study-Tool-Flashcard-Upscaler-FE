@@ -1,6 +1,7 @@
 <div class="flashcard-container" [class.flipped]="isFlipped">
   <div class="flashcard">
-    <div class="front">
+
+    <div class="front" *ngIf="!isEditing">
       <h4>{{ flashCard.question }}</h4>
       <div class="options">
         @for (option of flashCard.options; track $index) {
@@ -13,11 +14,31 @@
       <button (click)="submitAnswer()" [disabled]="!selectedOption">Check Answer</button>
       <button (click)="deleteFlashCard(flashCard.id)" class="">Delete Flashcard</button>
         
+      <button class="edit-button" (click)="editFlashcard()">Edit Flashcard</button>
     </div>
+
+    <!-- Editing stuff -->
+    <div class="front" *ngIf="isEditing">
+    <div class="edit-form">
+      <input [(ngModel)]="editModel.question" placeholder="Question" class="form-control mb-2" />
+      <input [(ngModel)]="editModel.answer" placeholder="Answer" class="form-control mb-2" />
+
+      <div *ngFor="let option of editModel.options; let i = index">
+        <input [(ngModel)]="editModel.options[i]" placeholder="Option {{ i + 1 }}" class="form-control mb-2" />
+      </div>
+
+      <div class="edit-buttons-row">
+        <button class="btn-save" (click)="saveEdit()">Save</button>
+        <button class="btn-cancel" (click)="cancelEdit()">Cancel</button>
+      </div>
+  </div>
+</div>
+
     <div class="back">
       <h4>The correct answer is:</h4>
       <p>{{ flashCard.answer }}</p>
-      <!-- <button (click)="flipBack()">Flip Back</button> -->
+      <button (click)="flipBack()">Flip Back</button>
     </div>
+
   </div>
-</div>  
+</div>

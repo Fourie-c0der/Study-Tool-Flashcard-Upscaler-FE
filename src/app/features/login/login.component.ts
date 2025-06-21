@@ -3,8 +3,10 @@ import { FormsModule } from '@angular/forms';
 import { LoginService } from '../../services/login.service';
 
 import { LoginCredentials } from '../../models/login-credentials';
+import { RegisterCredentials } from '../../models/register-credentials';
 import { UserDto } from '../../models/user-dto';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +28,25 @@ export class LoginComponent {
 
   users: UserDto[] = [];
 
+  register(){
+    let userCredentials: RegisterCredentials = {
+      id : 0,
+      username: this.username,
+      password: this.password
+    }
+
+    this.loginService.register(userCredentials).subscribe({
+      next: (user: UserDto) => {
+        console.log("Registration successful", user);
+        alert("Registration successful. You can now log in.");
+      },
+      error: (error: HttpErrorResponse) => {
+        console.error("Registration failed", error);
+
+        alert('${error.message}Registration failed. Please try again.');
+      }});
+  }
+
   loginSubmit() {
     let userCredentials: LoginCredentials = {
       username: this.username,
@@ -33,34 +54,16 @@ export class LoginComponent {
     }
 
     this.loginService.login(userCredentials).subscribe({
-      next: (users: UserDto[]) => {
-        this.users = users;
-        console.log(this.users);
-        
-        this.validateUser();
+      next: (user: UserDto) => {
+        if (this.username == user.username && this.password == user.password) {
+          this.router.navigate(['home']);
+        }
+        else 
+        {
+          console.error("User not found");
+        }
+
       }
     });
-  }
-
-  private validateUser(): void {
-    let foundUser = this.findUser();
-    if (foundUser)
-      this.router.navigate(['home']);
-    else 
-      console.error("User not found");
-
-  }
-
-  private findUser(): boolean {
-    let foundUser: boolean = false;
-    console.log(this.username, this.password);
-    
-    for (const user of this.users) {
-      if (user.username === this.username && user.password === this.password) {
-        foundUser = true;
-        break;
-      }
-    }
-    return foundUser;
   }
 }
