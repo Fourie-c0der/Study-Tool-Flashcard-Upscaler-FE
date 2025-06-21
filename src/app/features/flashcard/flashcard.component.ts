@@ -49,7 +49,6 @@ export class FlashcardComponent {
     options: []
   };
 
-  constructor(private flashcardService: FlashcardService) {}
 
   submitAnswer() {
     this.isFlipped = true;
