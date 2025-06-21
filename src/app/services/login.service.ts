@@ -21,4 +21,8 @@ export class LoginService {
   return this.http.post<UserDto>(this.baseUrl + 'Login', loginDetails);
 }
 
+  public register(loginDetails: LoginCredentials): Observable<UserDto> {
+  return this.http.post<UserDto>(this.baseUrl + 'Login/create-user', loginDetails);
+}
+
 }
